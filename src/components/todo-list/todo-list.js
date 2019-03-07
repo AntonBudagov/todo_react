@@ -24,7 +24,7 @@ import './todo-list.css';
 // -----------------------------------------------------------//
 export default class TodoList extends Component {
     render() {
-        const {todos, onDeleted} = this.props;
+        const {todos, onDeleted, onToggleDone, onToggleImportant} = this.props;
         const elements = todos.map((item) => {
             // Деструкторизацяи
             // в key передовать index плохая практика
@@ -33,6 +33,8 @@ export default class TodoList extends Component {
                 <li key={id} className="list-group-item">
                   <TodoListItem
                     {...itemProps}
+                    onToggleImportant={() => onToggleImportant(id)}
+                    onToggleDone={() => onToggleDone(id)}
                     onDeleted={() => onDeleted(id)}/>
                 </li>
             )

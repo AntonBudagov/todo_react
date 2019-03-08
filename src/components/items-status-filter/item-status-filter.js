@@ -1,20 +1,26 @@
 import React, {Component} from 'react';
 
-const filterButtons = [
-  {name: 'all', label: 'All'},
-  {name: 'active', label: 'Active'},
-  {name: 'done', label: 'Done'}
-];
+
 export default class ItemStatusFilter extends Component {
+  filterButtons = [
+    {name: 'all', label: 'All'},
+    {name: 'active', label: 'Active'},
+    {name: 'done', label: 'Done'}
+  ];
+
+
   render() {
-    const buttons = filterButtons.map((item) => {
+    const {filter, onFilterChange} = this.props;
+    const buttons = this.filterButtons.map((item) => {
       // Деструкторизацяи
       // в key передовать index плохая практика
-      const isActive = false;
-      const classNames = 'btn ' + (isActive ? 'btn-info' : 'btn-outline-secondary');
+      const isActive = filter === item.name;
+      // const classNames = 'btn ' + isActive ? 'btn-info': 'btn-outline-secondary';
+      const clazz = isActive ? 'btn-info': 'btn-outline-secondary';
       return <button key={item.name}
                      type="button"
-                     className={classNames}>{item.label}</button>
+                     onClick={() => onFilterChange(item.name)}
+                     className={`btn ${clazz}`}>{item.label}</button>
     });
 
     return (

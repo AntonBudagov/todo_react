@@ -14,6 +14,7 @@ export default class ItemAddForm extends Component {
       label: event.target.value
     });
 
+
   }
 
   onSubmit = (event) => {

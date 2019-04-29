@@ -6,7 +6,6 @@ const ItemAddForm = (props) => {
 
   const [label, setLabel] = useState('');
   const onLabelChange = (event) => {
-    console.log(event.target.value);
     setLabel(event.target.value);
   };
 

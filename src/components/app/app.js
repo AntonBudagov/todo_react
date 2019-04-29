@@ -51,6 +51,7 @@ export default class App extends Component {
     return items.filter((item) => item.label
       .toLowerCase()
       .indexOf(term.toLowerCase()) > -1)
+      // .includes(term.toLowerCase()) === true)
   }
 
   filterChange = (filter) => {

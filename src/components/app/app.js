@@ -11,7 +11,7 @@ export default class App extends Component {
   maxId = 100;
   state = {
     term: '',
-    filter: 'done',
+    filter: 'all',
     // done: false,
     // important: false,
     todoData: [

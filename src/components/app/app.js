@@ -29,10 +29,6 @@ const App = () => {
     createTodoItem('Learn React App', 33)]);
 
 
-  const searchChange = (term) => {
-    setTerm(term);
-  };
-
   const searchElement = (items, term) => {
     if (term === '') {
       return items;
@@ -111,8 +107,7 @@ const App = () => {
     {isLoggedIn ? loginBox : ''}
     <AppHeader toDo={todoCount} done={doneCount}/>
     <div className="search-panel d-flex">
-      <SearchPanel
-        onSearchChange={searchChange}/>
+      <SearchPanel term={term} setTerm={setTerm}/>
       <ItemStatusFilter filter={filter}
                         onFilterChange={filterChange}/>
     </div>

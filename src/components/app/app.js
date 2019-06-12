@@ -5,9 +5,15 @@ import TodoList from '../todo-list';
 import ItemStatusFilter from '../items-status-filter';
 import AddForm from '../item-add-form';
 
+
+import { connect } from 'react-redux'
 import './app.css'
 
-export default class App extends Component {
+const mapStateToprops = state=> ({
+  state,
+})
+
+export default connect(mapStateToprops)(class App extends Component {
   maxId = 100;
   state = {
     term: '',
@@ -18,11 +24,14 @@ export default class App extends Component {
       this.createTodoItem('Drink Coffee'),
       this.createTodoItem('Make Awesome App'),
       this.createTodoItem('Have a lunch'),
+
       // {label: 'Drink Coffee', important: false, id: 23},
       // {label: 'Make Awesome App', important: true, id: 43},
       // {label: 'Have a lunch', important: false, id: 34}
     ]
   };
+
+
 
 
   // searchElement = (event) => {
@@ -171,6 +180,8 @@ export default class App extends Component {
     // this.filter(, filter);
 
 
+    console.log(this.props.state)
+
     //
     const doneCount = this.state.todoData
       .filter((el) => el.done).length;
@@ -197,7 +208,7 @@ export default class App extends Component {
         onAdded={this.addItem}/>
     </div>)
   }
-}
+})
 // const App = () => {
 //     const isLoggedIn = false;
 //     const loginBox = <div><b>Welcome Back</b></div>;

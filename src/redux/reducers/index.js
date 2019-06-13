@@ -1,4 +1,4 @@
-import {ADD_TODO} from '../actionTypes'
+import {ADD_TODO} from './todo/actionTypes'
 
 
 const initialState  = {

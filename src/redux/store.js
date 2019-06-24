@@ -1,5 +1,16 @@
-import { createStore } from 'redux'
-import rootReducer  from './reducers/todo/reducer';
-const store = createStore(rootReducer);
-// const store = createStore(todoApp, window.STATE_FROM_SERVER)
-export default store;
+import { createStore, combineReducers } from 'redux';
+
+// import rootReducer  from './reducers/todo/reducer';
+import tasks from  './reducers/todo/reducer';
+import filterTasks from './reducers/filter-todo/reducer';
+
+
+
+const rootReducer = combineReducers({
+  tasks,
+  filterTasks,
+});
+
+const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+// const store = createStore(rootReducer);
+export default store

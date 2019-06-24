@@ -1,7 +1,7 @@
 import React, {useState} from "react";
-import './search-panel.css'
 import {connect} from 'react-redux';
-import actions from "../../redux/reducers/todo/actions";
+import filterTodo from '../../redux/reducers/filter-todo/actions';
+import './search-panel.css';
 
 
 const SearchPanel = (props) => {
@@ -12,7 +12,7 @@ const SearchPanel = (props) => {
     setTerm(term);
     console.log(term);
     props.onSearchChange(term);
-  }
+  };
 
 
   const searchText = 'Type here to search';
@@ -31,8 +31,11 @@ const SearchPanel = (props) => {
 };
 
 const mapStateToProps = ({term}) => ({term});
+// const mapStateToProps = state => ({
+//   term: state.filterTasks.term
+// });
 const mapDispatchToProps = (dispatch) => ({
-  onSearchChange: (payload) => dispatch(actions.searchTodo(payload))
+  onSearchChange: (payload) => dispatch(filterTodo.searchTodo(payload))
 });
 
 

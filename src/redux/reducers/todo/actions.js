@@ -2,10 +2,8 @@ import {
   ADD_TODO,
   TOGGLE_TODO_DONE,
   TOGGLE_TODO_IMPORTANT,
-  REMOVE_TODO,
-  SET_VISIBILITY_FILTER,
-  SEARCH_TODO
-} from './actionTypes';
+  REMOVE_TODO
+} from './types';
 
 // const actions = Object.freeze({
 
@@ -37,27 +35,6 @@ const actions = {
     return {
       type: TOGGLE_TODO_IMPORTANT,
       payload: id,
-    }
-  },
-
-  filterTodo: (filter) => {
-    return {
-      type: SET_VISIBILITY_FILTER,
-      filter
-    }
-  },
-
-  searchTodo: (term) => {
-    return {
-      type: SEARCH_TODO,
-      term
-    }
-  },
-  VisibilityFilters: () => {
-    return {
-      SHOW_ALL: 'SHOW_ALL',
-      SHOW_COMPLETED: 'SHOW_COMPLETED',
-      SHOW_ACTIVE: 'SHOW_ACTIVE'
     }
   }
 };

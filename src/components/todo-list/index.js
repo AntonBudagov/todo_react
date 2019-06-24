@@ -1,11 +1,11 @@
 import React from "react";
-import actions from "../../redux/reducers/todo/actions";
-import connect from "react-redux/es/connect/connect";
+import todoActions from "../../redux/reducers/todo/actions";
+import {connect} from "react-redux";
 import TodoListItem from '../todo-list-item'
 import './todo-list.css';
 
 
-const Index = (props) => {
+const TodoList = (props) => {
 
   const {todos, onDeleted, onToggleDone, onToggleImportant} = props;
   const elements = todos.map((item) => {
@@ -32,11 +32,11 @@ const Index = (props) => {
 
 
 const mapStateToProps = ({todoData}) => ({todoData});
-const mapDispatchToProps  = (dispatch) => ({
-  onToggleDone: (id) => dispatch(actions.toggleDone(id)),
-  onToggleImportant: (id) => dispatch(actions.toggleImportant(id)),
-  onDeleted: (id) => dispatch(actions.removeTodo(id))
-});
+const mapDispatchToProps  = {
+  onToggleDone: (id) => todoActions.toggleDone(id),
+  onToggleImportant: (id) => todoActions.toggleImportant(id),
+  onDeleted: (id) => todoActions.removeTodo(id)
+};
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Index);
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList);

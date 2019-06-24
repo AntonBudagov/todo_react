@@ -2,14 +2,12 @@ import {
   ADD_TODO,
   TOGGLE_TODO_DONE,
   TOGGLE_TODO_IMPORTANT,
-  REMOVE_TODO,
-  SET_VISIBILITY_FILTER,
-  SEARCH_TODO
-} from './actionTypes';
+  REMOVE_TODO
+} from './types';
 
 
 const initialState = {
-  filter: 'done',
+  filter: 'all',
   term: '',
   todoData: [
     // createTodoItem('Drink Coffee 2', 21),
@@ -72,28 +70,8 @@ const reducer = (state = initialState, action) => {
         todoData: toggleProperty(state.todoData, action.payload, 'important')
       };
 
-    case SET_VISIBILITY_FILTER:
-      return {
-        ...state,
-        filter: action.filter,
-        // todoData: filterItems(state.todoData, action.filter)
-      };
-
-    case SEARCH_TODO:
-      return {
-        ...state,
-        term: action.term
-      };
-
-
     default:
       return state;
-    // return {
-    //   term: '',
-    //   filter: state.filter,
-    //   todoData: filterItems(state.todoData, state.filter)
-    //
-    // };
   }
 };
 

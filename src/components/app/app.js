@@ -53,9 +53,9 @@ const App = (props) => {
 };
 
 const mapStateToProps = state => ({
-  todoData: filterItems(searchElement(state.todoData, state.term), state.filter),
-  filter: state.filter,
-  term: state.term
+  todoData: filterItems(searchElement(state.tasks.todoData , state.filterTasks.term), state.filterTasks.filter),
+  // filter: state.filterTodo.filter,
+  // term: state.filterTodo.term
 });
 
 

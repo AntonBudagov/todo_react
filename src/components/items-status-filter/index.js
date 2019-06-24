@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
-import actions from "../../redux/reducers/todo/actions";
+import actions from "../../redux/reducers/filter-todo/actions";
 
 
-const Index = (props) => {
+const ItemStatusFilter = (props) => {
   const filterButtons = [
     {name: 'all', label: 'All'},
     {name: 'active', label: 'Active'},
@@ -40,4 +40,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Index);
+export default connect(mapStateToProps, mapDispatchToProps)(ItemStatusFilter);

@@ -1,5 +1,13 @@
-import {ADD_TODO, TOGGLE_TODO_DONE, TOGGLE_TODO_IMPORTANT, REMOVE_TODO} from './actionTypes'
+import {
+  ADD_TODO,
+  TOGGLE_TODO_DONE,
+  TOGGLE_TODO_IMPORTANT,
+  REMOVE_TODO,
+  SET_VISIBILITY_FILTER
+} from './actionTypes';
+
 // const actions = Object.freeze({
+
 let id = 100;
 const actions = {
   addTodo: (label) => {
@@ -28,6 +36,20 @@ const actions = {
     return {
       type: TOGGLE_TODO_IMPORTANT,
       payload: id,
+    }
+  },
+
+  filterTodo: (filter) => {
+    return {
+      type: SET_VISIBILITY_FILTER,
+      filter
+    }
+  },
+  VisibilityFilters: () => {
+    return {
+      SHOW_ALL: 'SHOW_ALL',
+      SHOW_COMPLETED: 'SHOW_COMPLETED',
+      SHOW_ACTIVE: 'SHOW_ACTIVE'
     }
   }
 };

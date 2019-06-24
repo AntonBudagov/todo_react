@@ -1,4 +1,16 @@
-import {ADD_TODO, TOGGLE_TODO_DONE, TOGGLE_TODO_IMPORTANT, REMOVE_TODO} from './actionTypes';
+import {ADD_TODO, TOGGLE_TODO_DONE, TOGGLE_TODO_IMPORTANT, REMOVE_TODO, SET_VISIBILITY_FILTER} from './actionTypes';
+
+
+const initialState = {
+  filter: 'done',
+  term: '',
+  todoData: [
+    // createTodoItem('Drink Coffee 2', 21),
+    {label: 'Drink Coffee', done: false, important: false, id: 23},
+    {label: 'Make Awesome App', done: false, important: true, id: 43},
+    {label: 'Have a lunch', done: true, important: false, id: 34}
+  ]
+};
 
 
 const createTodoItem = (label, id) => {
@@ -24,52 +36,22 @@ const toggleProperty = (arr, id, propName) => {
   return newArray
 };
 
-//   onToggleDone = (id) => {
-//     this.setState(({todoData}) => {
-//       console.log('onToggleDone', id)
-//       return {
-//         todoData: this.toggleProperty(todoData, id, 'important')
-//       }
-//     });
-//   };
 
+const searchElement = (items, term) => {
+  if (term === '') {
+    return items;
+  }
+  return items.filter((item) => item.label
+    .toLowerCase()
+    .indexOf(term.toLowerCase()) > -1)
+}
 
-//   deleteItem = (id) => {
-//     console.log(id);
-//     // // плохая практика так как мы меняем state
-//     // this.setState(({todoData}) => {
-//     //     const idx = todoData.findIndex((el) => el.id === id);
-//     //     return todoData.splice(idx, 1)
-//     // })
-//     // best way
-//     this.setState(({todoData}) => {
-//       const idx = todoData.findIndex((el) => el.id === id);
-//       // const before = todoData.slice(0, idx);
-//       // const after =  todoData.slice(idx + 1);
-//       const newArray = [...todoData.slice(0, idx), ...todoData.slice(idx + 1)]
-//       return {
-//         todoData: newArray
-//       }
-//     })
-//
-//   };
-
-
-const initialState = {
-  filter: 'done',
-  term: '',
-  todoData: [
-    createTodoItem('Drink Coffee 2', 21),
-    {label: 'Drink Coffee', done: false, important: false, id: 23},
-    {label: 'Make Awesome App', done: false, important: true, id: 43},
-    {label: 'Have a lunch', done: false, important: false, id: 34}
-  ]
-};
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TODO:
       return {
+        ...state,
         todoData: [
           ...state.todoData, createTodoItem(action.payload, action.id)
         ]
@@ -79,19 +61,36 @@ const reducer = (state = initialState, action) => {
       const idx = state.todoData.findIndex((el) => el.id === id);
       const newArray = [... state.todoData.slice(0, idx), ... state.todoData.slice(idx + 1)]
       return {
+        ...state,
         todoData: newArray
       };
     case TOGGLE_TODO_DONE:
       return {
+        ...state,
         todoData: toggleProperty(state.todoData, action.payload, 'done')
       };
     case TOGGLE_TODO_IMPORTANT:
       return {
+        ...state,
         todoData: toggleProperty(state.todoData, action.payload, 'important')
+      };
+
+    case SET_VISIBILITY_FILTER:
+      // const visibleItems = filterItems(searchElement(state.todoData, ''), action.filter);
+      return {
+        ...state,
+        filter: action.filter,
+        // todoData: filterItems(state.todoData, action.filter)
       };
 
     default:
       return state;
+    // return {
+    //   term: '',
+    //   filter: state.filter,
+    //   todoData: filterItems(state.todoData, state.filter)
+    //
+    // };
   }
 };
 

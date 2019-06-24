@@ -1,5 +1,5 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, {useState} from 'react';
+import {connect} from 'react-redux';
 import SearchPanel from '../search-panel';
 import AppHeader from '../app-header';
 import TodoList from '../todo-list';
@@ -10,70 +10,57 @@ import './app.css'
 
 import actions from './../../redux/reducers/todo/actions'
 
+const filterItems = (items, filter) => {
+  switch (filter) {
+    case 'all':
+      return items;
+    case 'active':
+      return items.filter(({done}) => !done);
+    case 'done':
+      return items.filter((item) => item.done);
+    default:
+      return items;
+  }
+  ;
+};
 
-const mapStateToProps = ({todoData}) => ({todoData});
-
-const mapStateToAction = (dispatch) => ({
-  addItem: () => dispatch(actions.addTodo())
-});
 
 const App = (props) => {
-    // const loginBox = <div><b>Welcome Back</b></div>;
-  console.log(props);
   const {todoData} = props;
 
-  // const addItem = (text) => {
-  //   // generate id
-  //   const newItem = {
-  //     label: text,
-  //     important: false,
-  //     id: maxId++
-  //   };
-  // }
-  console.log(props);
+  const doneCount = todoData
+    .filter((el) => el.done).length;
+  const todoCount = todoData.length - doneCount;
+
   return (
-      <div className="todo-app">
-      <AppHeader toDo={1} done={false}/>
-        <button onClick={props.addItem}>1</button>
+    <div className="todo-app">
+      <AppHeader toDo={todoCount} done={doneCount}/>
       <div className="search-panel d-flex">
         {/*<SearchPanel*/}
-          {/*onSearchChange={this.searchChange}/>*/}
-        {/*<ItemStatusFilter filter={filter}*/}
-                          {/*onFilterChange={this.filterChange}/>*/}
+        {/*onSearchChange={this.searchChange}/>*/}
+        <ItemStatusFilter/>
       </div>
       <TodoList
         todos={todoData}
-        onDeleted={() => {}}
-        onToggleImportant={() => {}}
-        onToggleDone={() => {}}
       />
       <AddForm/>
     </div>)
 };
 
-export default connect(mapStateToProps, mapStateToAction)(App)
-//
+const mapStateToProps = state => ({
+  todoData: filterItems(state.todoData, state.filter),
+  filter: state.filter
+});
+
+
+const mapStateToAction = (dispatch) => ({
+  // addItem: () => dispatch(actions.addTodo()),
+  // onFilterItems: (filter) => dispatch(actions.filterTodo(filter))
+});
+
+export default connect(mapStateToProps, mapStateToAction)(App);
 // export default connect(mapStateToProps)(class App extends Component {
-//   maxId = 100;
-//   state = {
-//     term: '',
-//     filter: 'done',
-//     // done: false,
-//     // important: false,
-//     todoData: [
-//       this.createTodoItem('Drink Coffee'),
-//       this.createTodoItem('Make Awesome App'),
-//       this.createTodoItem('Have a lunch'),
-//
-//       // {label: 'Drink Coffee', important: false, id: 23},
-//       // {label: 'Make Awesome App', important: true, id: 43},
-//       // {label: 'Have a lunch', important: false, id: 34}
-//     ]
-//   };
-//
-//
-//
-//
+
 //   // searchElement = (event) => {
 //   //  // let searchQuery = event.target.value.toLowerCase();
 //   //  // if (searchQuery === '') {
@@ -102,114 +89,7 @@ export default connect(mapStateToProps, mapStateToAction)(App)
 //       .indexOf(term.toLowerCase()) > -1)
 //   }
 //
-//   filterChange = (filter) => {
-//     this.setState({filter})
-//   }
-//
-//   _filterItems(items, filter) {
-//     switch (filter) {
-//       case 'all':
-//         return items;
-//         // console.log(1);
-//         break;
-//       case 'active':
-//         return items.filter(({done}) => !done)
-//         // console.log(2);
-//         break;
-//       case 'done':
-//         return items.filter((item) => item.done)
-//         // console.log(3);
-//         break;
-//       default:
-//         return items;
-//     }
-//   }
-//
-//
-//   createTodoItem(label) {
-//     return {
-//       label,
-//       important: false,
-//       done: false,
-//       id: this.maxId++
-//     }
-//   }
-//
-//   toggleProperty(arr, id, propName) {
-//     const idx = arr.findIndex((el) => el.id === id);
-//     const oldItem = arr[idx];
-//     // update object
-//     const newItem = {...oldItem, [propName]: !oldItem[propName]};
-//     // create new array
-//     const newArray = [
-//       ...arr.slice(0, idx),
-//       newItem,
-//       ...arr.slice(idx + 1)];
-//     return newArray
-//   }
-//
-//   onToggleImportant = (id) => {
-//     this.setState(({todoData}) => {
-//       const idx = todoData.findIndex((el) => el.id === id);
-//       const oldItem = todoData[idx];
-//       // update object
-//       const newItem = {...oldItem, done: !oldItem.done};
-//       // create new array
-//       const newArray = [
-//         ...todoData.slice(0, idx),
-//         newItem,
-//         ...todoData.slice(idx + 1)];
-//       return {
-//         todoData: newArray
-//       }
-//     });
-//     console.log('onToggleImportant', id)
-//   };
-//
-//   onToggleDone = (id) => {
-//     this.setState(({todoData}) => {
-//       console.log('onToggleDone', id)
-//       return {
-//         todoData: this.toggleProperty(todoData, id, 'important')
-//       }
-//     });
-//   };
-//
-//   addItem = (text) => {
-//     // generate id
-//     // const newItem = {
-//     //   label:  text,
-//     //   important: false,
-//     //   id: this.maxId++
-//     // };
-//     const newItem = this.createTodoItem(text);
-//
-//     this.setState(({todoData}) => {
-//       const newArray = [...todoData, newItem]
-//       return {
-//         todoData: newArray
-//       }
-//     })
-//   }
-//   deleteItem = (id) => {
-//     console.log(id);
-//     // // плохая практика так как мы меняем state
-//     // this.setState(({todoData}) => {
-//     //     const idx = todoData.findIndex((el) => el.id === id);
-//     //     return todoData.splice(idx, 1)
-//     // })
-//     // best way
-//     this.setState(({todoData}) => {
-//       const idx = todoData.findIndex((el) => el.id === id);
-//       // const before = todoData.slice(0, idx);
-//       // const after =  todoData.slice(idx + 1);
-//       const newArray = [...todoData.slice(0, idx), ...todoData.slice(idx + 1)]
-//       return {
-//         todoData: newArray
-//       }
-//     })
-//
-//   };
+
 //
 //   render() {
 //     // search

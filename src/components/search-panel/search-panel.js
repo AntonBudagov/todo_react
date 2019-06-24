@@ -1,44 +1,39 @@
-import React, {Component} from "react";
+import React, {useState} from "react";
 import './search-panel.css'
+import {connect} from 'react-redux';
+import actions from "../../redux/reducers/todo/actions";
 
-// const SearchPanel = () => {
-//
-//
-//   const searchText = 'Type here to search';
-//   const searchStyle = {
-//     fontSize: '20px'
-//   };
-//   return <input
-//     className="form-control search-input"
-//     type="text"
-//     placeholder={searchText}
-//     tabIndex={1}
-//     style={searchStyle}/>
-// };
-//
-// export default SearchPanel;
-export default class SearchPanel extends Component {
-  state = {
-    term: '',
-  };
-  onChangeSearch = (event) => {
-    const term = event.target.value
-    this.setState({term});
-    this.props.onSearchChange(term)
+
+const SearchPanel = (props) => {
+  const [term, setTerm] = useState('');
+
+  const onChangeSearch = (event) => {
+    const term = event.target.value;
+    setTerm(term);
+    console.log(term);
+    props.onSearchChange(term);
   }
 
-  render() {
-    // const {onSearchChange} = this.props;
-    const searchText = 'Type here to search';
-    const searchStyle = {
-      fontSize: '20px'
-    };
+
+  const searchText = 'Type here to search';
+  const searchStyle = {
+    fontSize: '20px'
+  };
   return (<input
-    onChange={this.onChangeSearch}
+    onChange={onChangeSearch}
     className="form-control search-input"
     type="text"
     placeholder={searchText}
     tabIndex={1}
+    value={term}
     style={searchStyle}/>)
-  }
-}
+
+};
+
+const mapStateToProps = ({term}) => ({term});
+const mapDispatchToProps = (dispatch) => ({
+  onSearchChange: (payload) => dispatch(actions.searchTodo(payload))
+});
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchPanel);

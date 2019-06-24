@@ -3,7 +3,8 @@ import {
   TOGGLE_TODO_DONE,
   TOGGLE_TODO_IMPORTANT,
   REMOVE_TODO,
-  SET_VISIBILITY_FILTER
+  SET_VISIBILITY_FILTER,
+  SEARCH_TODO
 } from './actionTypes';
 
 // const actions = Object.freeze({
@@ -43,6 +44,13 @@ const actions = {
     return {
       type: SET_VISIBILITY_FILTER,
       filter
+    }
+  },
+
+  searchTodo: (term) => {
+    return {
+      type: SEARCH_TODO,
+      term
     }
   },
   VisibilityFilters: () => {

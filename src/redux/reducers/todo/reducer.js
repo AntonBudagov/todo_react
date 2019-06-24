@@ -1,4 +1,11 @@
-import {ADD_TODO, TOGGLE_TODO_DONE, TOGGLE_TODO_IMPORTANT, REMOVE_TODO, SET_VISIBILITY_FILTER} from './actionTypes';
+import {
+  ADD_TODO,
+  TOGGLE_TODO_DONE,
+  TOGGLE_TODO_IMPORTANT,
+  REMOVE_TODO,
+  SET_VISIBILITY_FILTER,
+  SEARCH_TODO
+} from './actionTypes';
 
 
 const initialState = {
@@ -37,16 +44,6 @@ const toggleProperty = (arr, id, propName) => {
 };
 
 
-const searchElement = (items, term) => {
-  if (term === '') {
-    return items;
-  }
-  return items.filter((item) => item.label
-    .toLowerCase()
-    .indexOf(term.toLowerCase()) > -1)
-}
-
-
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TODO:
@@ -76,12 +73,18 @@ const reducer = (state = initialState, action) => {
       };
 
     case SET_VISIBILITY_FILTER:
-      // const visibleItems = filterItems(searchElement(state.todoData, ''), action.filter);
       return {
         ...state,
         filter: action.filter,
         // todoData: filterItems(state.todoData, action.filter)
       };
+
+    case SEARCH_TODO:
+      return {
+        ...state,
+        term: action.term
+      };
+
 
     default:
       return state;

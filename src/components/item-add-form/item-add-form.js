@@ -1,39 +1,40 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import './item-add-form.css';
+import { connect } from 'react-redux';
+import actions from '../../redux/reducers/todo/actions';
 
 
-export default class ItemAddForm extends Component {
+const ItemAddForm = (props) => {
+  const [label, setLabel] = useState('');
 
-
-  state = {
-    label: ''
+  const onLabelChange = (event) => {
+    setLabel(event.target.value);
   };
 
-  onLabelChange = (event) => {
-    this.setState({
-      label: event.target.value
-    });
-
-
-  }
-
-  onSubmit = (event) => {
+  const onSubmit = (event) => {
     event.preventDefault();
-    this.props.onAdded(this.state.label);
-    this.setState({label: ''})
+    props.addItem(label);
+    setLabel('');
   };
 
-  render() {
+  return (
+    <form className="item-add-form  d-flex" onSubmit={onSubmit}>
+      <input type="text" className="form-control"
+             onChange={onLabelChange}
+             placeholder="what needs to be done"
+             value={label}
+      />
+      <button className="btn btn-outline-secondary">Add Item</button>
+    </form>
+  )
 
-    return (
-      <form className="item-add-form  d-flex" onSubmit={this.onSubmit}>
-        <input type="text" className="form-control"
-               onChange={this.onLabelChange}
-               placeholder="what needs to be done"
-               value={this.state.label}/>
-        <button className="btn btn-outline-secondary">Add Item</button>
+};
 
-      </form>
-    )
-  }
-}
+const mapStateToProps = ({todoData}) => ({todoData});
+const mapStateToAction = (dispatch) => ({
+  addItem: (payload) => dispatch(actions.addTodo(payload))
+});
+
+
+export default connect(mapStateToProps, mapStateToAction)(ItemAddForm);
+

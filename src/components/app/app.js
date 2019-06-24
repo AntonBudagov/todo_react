@@ -47,8 +47,7 @@ const App = (props) => {
         onToggleImportant={() => {}}
         onToggleDone={() => {}}
       />
-      <AddForm
-        onAdded={props.addItem}/>
+      <AddForm/>
     </div>)
 };
 

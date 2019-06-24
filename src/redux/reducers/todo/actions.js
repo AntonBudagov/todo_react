@@ -1,30 +1,36 @@
-import {ADD_TODO, TOGGLE_TODO_DONE} from './actionTypes'
+import {ADD_TODO, TOGGLE_TODO_DONE, TOGGLE_TODO_IMPORTANT, REMOVE_TODO} from './actionTypes'
 // const actions = Object.freeze({
-//   ADD_TODO: "ADD_TODO",
-//   addTodo: (text) => ({
-//     type: actions.ADD_TODO,
-//     text,
-//   })
-// });
-
+let id = 100;
 const actions = {
-  addTodo: (text) => {
-    console.log('actions: addTodo', text);
+  addTodo: (label) => {
     return {
       type: ADD_TODO,
-      payload: text,
+      id: id++,
+      payload: label,
+    }
+  },
+
+  removeTodo: (id) => {
+    return {
+      type: REMOVE_TODO,
+      id
     }
   },
 
   toggleDone: (id) => {
-    console.log('actions: toggleDone', id);
     return {
       type: TOGGLE_TODO_DONE,
       payload: id,
     }
+  },
+
+  toggleImportant: (id) => {
+    return {
+      type: TOGGLE_TODO_IMPORTANT,
+      payload: id,
+    }
   }
 };
-
 
 
 export default actions

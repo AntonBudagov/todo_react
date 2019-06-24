@@ -1,6 +1,8 @@
-import React, {Component} from "react";
+import React from "react";
 import TodoListItem from '../todo-list-item'
 import './todo-list.css';
+import actions from "../../redux/reducers/todo/actions";
+import connect from "react-redux/es/connect/connect";
 
 
 const TodoList = (props) => {
@@ -28,4 +30,12 @@ const TodoList = (props) => {
 
 };
 
-export default TodoList;
+
+const mapStateToProps = ({todoData}) => ({todoData});
+const mapStateToAction = (dispatch) => ({
+  onToggleDone: (id) => dispatch(actions.toggleDone(id)),
+  onToggleImportant: (id) => dispatch(actions.toggleImportant(id)),
+  onDeleted: (id) => dispatch(actions.removeTodo(id))
+});
+
+export default connect(mapStateToProps,mapStateToAction)(TodoList);

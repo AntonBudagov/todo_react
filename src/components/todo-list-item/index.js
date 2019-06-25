@@ -2,7 +2,7 @@ import React from 'react';
 import './todo-list-item.css';
 
 
-const Index = (props) => {
+const TodoListItem = (props) => {
 
   const {
     label, onDeleted, onToggleDone, onToggleImportant,
@@ -19,8 +19,7 @@ const Index = (props) => {
                 onClick={onToggleDone}>
             {label}
           </span>
-          </span>
-      {/*this.onLabelClick.bind(this)*/}
+        </span>
       <button type="button"
               onClick={onDeleted}
               className="btn btn-outline-danger btn-sm float-right">
@@ -36,4 +35,4 @@ const Index = (props) => {
 };
 
 
-export default Index;
+export default TodoListItem;

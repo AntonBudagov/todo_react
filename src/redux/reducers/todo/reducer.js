@@ -47,14 +47,12 @@ const reducer = (state = initialState, action) => {
     case ADD_TODO:
       return {
         ...state,
-        todoData: [
-          ...state.todoData, createTodoItem(action.payload, action.id)
-        ]
+        todoData: [...state.todoData, createTodoItem(action.payload, action.id)]
       };
     case REMOVE_TODO:
       const id = action.id;
       const idx = state.todoData.findIndex((el) => el.id === id);
-      const newArray = [... state.todoData.slice(0, idx), ... state.todoData.slice(idx + 1)]
+      const newArray = [...state.todoData.slice(0, idx), ...state.todoData.slice(idx + 1)];
       return {
         ...state,
         todoData: newArray

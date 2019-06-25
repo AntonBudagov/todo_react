@@ -45,17 +45,13 @@ const App = (props) => {
         <SearchPanel/>
         <ItemStatusFilter/>
       </div>
-      <TodoList
-        todos={todoData}
-      />
+      <TodoList todos={todoData}/>
       <AddForm/>
     </div>)
 };
 
 const mapStateToProps = state => ({
   todoData: filterItems(searchElement(state.tasks.todoData , state.filterTasks.term), state.filterTasks.filter),
-  // filter: state.filterTodo.filter,
-  // term: state.filterTodo.term
 });
 
 

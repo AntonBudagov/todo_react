@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {connect} from 'react-redux';
-import filterTodo from '../../redux/reducers/filter-todo/actions';
+import filterTodo from '../../redux/reducers/filter-task/actions';
 import './search-panel.css';
 
 

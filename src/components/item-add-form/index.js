@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { connect } from 'react-redux';
-import actions from '../../redux/reducers/todo/actions';
+import actions from '../../redux/reducers/task/actions';
 import './item-add-form.css';
 
 
@@ -17,17 +17,17 @@ const ItemAddForm = (props) => {
     if (!!label && isInvalid) {
       setIsInvalid(false)
     }
-  },[label, isInvalid]);
+  },[isInvalid, label]);
 
 
   const onSubmit = (e) => {
     e.preventDefault();
     if (label) {
+      setIsInvalid(false);
       props.addItem(label);
       setLabel('');
-      setIsInvalid(false)
     } else {
-      setIsInvalid(true);
+      setIsInvalid(true)
     }
   };
 
@@ -37,6 +37,7 @@ const ItemAddForm = (props) => {
       <input type="text" className={isInvalid ? 'is-invalid form-control': 'form-control'}
              onChange={handleChangeLabel}
              placeholder="what needs to be done"
+             value={label}
 
       />
       <button className="btn btn-outline-secondary">Add Item</button>

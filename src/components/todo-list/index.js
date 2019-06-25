@@ -1,5 +1,5 @@
 import React from "react";
-import todoActions from "../../redux/reducers/todo/actions";
+import todoActions from "../../redux/reducers/task/actions";
 import {connect} from "react-redux";
 import TodoListItem from '../todo-list-item'
 import './todo-list.css';
@@ -22,9 +22,10 @@ const TodoList = (props) => {
       </li>
     )
   });
+  const content = elements.length ? elements : <h4>not found tasks</h4>;
   return (
     <ul className="list-group todo-list">
-      {elements}
+      {content}
     </ul>
   )
 

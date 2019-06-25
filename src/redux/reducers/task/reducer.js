@@ -1,8 +1,8 @@
 import {
-  ADD_TODO,
-  TOGGLE_TODO_DONE,
-  TOGGLE_TODO_IMPORTANT,
-  REMOVE_TODO
+  ADD_TASK,
+  TOGGLE_TASK_DONE,
+  TOGGLE_TASK_IMPORTANT,
+  REMOVE_TASK
 } from './types';
 
 
@@ -44,12 +44,12 @@ const toggleProperty = (arr, id, propName) => {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_TODO:
+    case ADD_TASK:
       return {
         ...state,
         todoData: [...state.todoData, createTodoItem(action.payload, action.id)]
       };
-    case REMOVE_TODO:
+    case REMOVE_TASK:
       const id = action.id;
       const idx = state.todoData.findIndex((el) => el.id === id);
       const newArray = [...state.todoData.slice(0, idx), ...state.todoData.slice(idx + 1)];
@@ -57,12 +57,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         todoData: newArray
       };
-    case TOGGLE_TODO_DONE:
+    case TOGGLE_TASK_DONE:
       return {
         ...state,
         todoData: toggleProperty(state.todoData, action.payload, 'done')
       };
-    case TOGGLE_TODO_IMPORTANT:
+    case TOGGLE_TASK_IMPORTANT:
       return {
         ...state,
         todoData: toggleProperty(state.todoData, action.payload, 'important')

@@ -1,4 +1,4 @@
-import {SEARCH_TODO, SET_VISIBILITY_FILTER} from "./types";
+import {SEARCH_TASK, SET_VISIBILITY_FILTER} from "./types";
 
 const actions = {
   filterTodo: (filter) => {
@@ -10,7 +10,7 @@ const actions = {
 
   searchTodo: (term) => {
     return {
-      type: SEARCH_TODO,
+      type: SEARCH_TASK,
       term
     }
   }

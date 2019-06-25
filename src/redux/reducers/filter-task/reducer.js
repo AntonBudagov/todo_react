@@ -1,6 +1,6 @@
 import {
   SET_VISIBILITY_FILTER,
-  SEARCH_TODO
+  SEARCH_TASK
 } from './types';
 
 
@@ -19,7 +19,7 @@ const reducer = (state = initialState, action) => {
         filter: action.filter
       };
 
-    case SEARCH_TODO:
+    case SEARCH_TASK:
       return {
         ...state,
         term: action.term

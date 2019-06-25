@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import actions from '../../redux/reducers/filter-todo/actions';
+import actions from '../../redux/reducers/filter-task/actions';
 
 
 const ItemStatusFilter = (props) => {

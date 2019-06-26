@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import AppHeader from '../app-header';
 import SearchPanel from '../search-panel';
@@ -6,6 +6,7 @@ import TodoList from '../todo-list';
 import ItemStatusFilter from '../items-status-filter';
 import AddForm from '../item-add-form';
 import './app.css'
+import actions from "../../redux/reducers/task/actions";
 
 
 const searchElement = (items, term) => {
@@ -32,11 +33,15 @@ const filterItems = (items, filter) => {
 
 
 const App = (props) => {
-  const {todoData} = props;
+  const {todoData, getTasks} = props;
 
   const doneCount = todoData
     .filter((el) => el.done).length;
   const todoCount = todoData.length - doneCount;
+
+  useEffect(() => {
+   getTasks()
+  }, [getTasks]);
 
   return (
     <div className="todo-app">
@@ -54,6 +59,10 @@ const mapStateToProps = state => ({
   todoData: filterItems(searchElement(state.tasks.todoData , state.filterTasks.term), state.filterTasks.filter),
 });
 
+const mapDispatchToProps = {
+  getTasks: () => actions.getTasks()
+};
 
-export default connect(mapStateToProps, null)(App);
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
 

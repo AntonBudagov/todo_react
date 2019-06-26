@@ -33,7 +33,7 @@ const ItemStatusFilter = (props) => {
 
 
 const mapStateToProps = state => ({
-  filter: state.filter
+  filter: state.filterTasks.filter
 });
 const mapDispatchToProps = (dispatch) => ({
   onFilterChange: (filter) => dispatch(actions.filterTodo(filter))

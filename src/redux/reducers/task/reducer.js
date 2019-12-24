@@ -9,12 +9,7 @@ import {
 const initialState = {
   filter: 'all',
   term: '',
-  todoData: [
-    // createTodoItem('Drink Coffee 2', 21),
-    {label: 'Drink Coffee', done: false, important: false, id: 23},
-    {label: 'Make Awesome App', done: false, important: true, id: 43},
-    {label: 'Have a lunch', done: true, important: false, id: 34}
-  ]
+  todoData: []
 };
 
 
@@ -44,6 +39,13 @@ const toggleProperty = (arr, id, propName) => {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+
+    case 'TASKS':
+      return {
+        ...state,
+        todoData: [...action.payload]
+      };
+
     case ADD_TASK:
       return {
         ...state,

@@ -8,6 +8,9 @@ import {
 
 let id = 100;
 const actions = {
+
+  getTasks: () => ({type: 'TASKS_REQUEST'}),
+
   addTodo: (label) => {
     return {
       type: ADD_TASK,

@@ -5,7 +5,6 @@ import {
   REMOVE_TASK
 } from './types';
 
-// const actions = Object.freeze({
 
 let id = 100;
 const actions = {

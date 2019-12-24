@@ -40,7 +40,7 @@ const ItemAddForm = (props) => {
 
 const mapStateToProps = ({todoData}) => ({todoData});
 const mapDispatchToProps = (dispatch) => ({
-  addItem: (payload) => dispatch(actions.addTodo(payload))
+  addItem: payload => dispatch(actions.addTodo(payload))
 });
 
 

@@ -5,6 +5,7 @@ const API = new Task();
 export function* fetchTasks() {
   try {
     const data  = yield API.getAllTask();
+    console.log(data);
     yield put({ type: "TASKS", payload: data })
 
   } catch (e) {
@@ -12,6 +13,16 @@ export function* fetchTasks() {
   }
 };
 
+export function* addTasks(data) {
+  try {
+    const data  = yield API.add(data);
+    console.log(data);
+    yield put({ type: "TASKS", payload: data })
+
+  } catch (e) {
+    yield put({type: "FETCH_FAILED", e});
+  }
+};
 
 
 export default function* rootSaga() {

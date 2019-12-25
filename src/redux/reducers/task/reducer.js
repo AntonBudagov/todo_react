@@ -1,22 +1,26 @@
 import {
+  ADD_TASK_REQUEST,
   ADD_TASK,
   TOGGLE_TASK_DONE,
   TOGGLE_TASK_IMPORTANT,
-  REMOVE_TASK
+  REMOVE_TASK, TASKS_REQUEST,
+  TASKS
 } from './types';
 
 
 const initialState = {
   filter: 'all',
   term: '',
-  todoData: []
+  todoData: [],
+  loading: false
 };
 
 
-const createTodoItem = (label, id) => {
+const createTodoItem = (label) => {
+  // console.log('dd', newTask);
   return {
-    id,
-    label,
+    // id: newTask.id,
+    label: label,
     important: false,
     done: false
   }
@@ -40,17 +44,28 @@ const toggleProperty = (arr, id, propName) => {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
 
-    case 'TASKS':
+    case TASKS_REQUEST:
+      return {
+        ...state,
+        loading: true
+      }
+
+    case TASKS:
+      console.log('TASKS', action);
       return {
         ...state,
         todoData: [...action.payload]
       };
 
+
+    case ADD_TASK_REQUEST:
+      console.log(action);
+      return { ...state, loading: true }
+
     case ADD_TASK:
-      return {
-        ...state,
-        todoData: [...state.todoData, createTodoItem(action.payload, action.id)]
-      };
+      // console.log('ADD_TASK', action);
+      return {...state, loading: false, todoData: [...state.todoData, createTodoItem(action.payload)]};
+
     case REMOVE_TASK:
       const id = action.id;
       const idx = state.todoData.findIndex((el) => el.id === id);
@@ -64,6 +79,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         todoData: toggleProperty(state.todoData, action.payload, 'done')
       };
+
     case TOGGLE_TASK_IMPORTANT:
       return {
         ...state,

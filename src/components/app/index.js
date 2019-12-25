@@ -5,8 +5,8 @@ import SearchPanel from '../search-panel';
 import TodoList from '../todo-list';
 import ItemStatusFilter from '../items-status-filter';
 import AddForm from '../item-add-form';
-import './app.css'
 import actions from "../../redux/reducers/task/actions";
+import './app.css'
 
 
 const searchElement = (items, term) => {
@@ -59,10 +59,10 @@ const mapStateToProps = state => ({
   todoData: filterItems(searchElement(state.tasks.todoData , state.filterTasks.term), state.filterTasks.filter),
 });
 
-const mapDispatchToProps = {
-  getTasks: () => actions.getTasks()
-};
+// const mapDispatchToProps = {
+//   getTasks: () => actions.getRequestTasks()
+// };
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, {getTasks: actions.getRequestTasks})(App);
 

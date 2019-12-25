@@ -19,7 +19,12 @@ const ItemAddForm = (props) => {
     e.preventDefault();
     if (label) {
       setIsInvalid(false);
-      props.addItem(label);
+      let task = {
+        label: label,
+        important: false,
+        done: false
+      }
+      props.addTask(task);
       setLabel('');
     } else {
       setIsInvalid(true)
@@ -39,9 +44,10 @@ const ItemAddForm = (props) => {
 };
 
 const mapStateToProps = ({todoData}) => ({todoData});
-const mapDispatchToProps = (dispatch) => ({
-  addItem: payload => dispatch(actions.addTodo(payload))
-});
+// const mapDispatchToProps = (dispatch) => ({
+//   addItem: payload => dispatch(actions.addTask(payload))
+// });
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(ItemAddForm);
+// export default connect(mapStateToProps, mapDispatchToProps)(ItemAddForm);
+export default connect(mapStateToProps, {addTask: payload => actions.addRequestTask(payload)})(ItemAddForm);

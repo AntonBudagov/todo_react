@@ -1,25 +1,29 @@
 import {
+  ADD_TASK_REQUEST,
   ADD_TASK,
+
   TOGGLE_TASK_DONE,
   TOGGLE_TASK_IMPORTANT,
-  REMOVE_TASK
+  REMOVE_TASK,
+
+
+  TASKS_REQUEST,
+  TASKS
 } from './types';
 
 
 let id = 100;
 const actions = {
 
-  getTasks: () => ({type: 'TASKS_REQUEST'}),
+  getRequestTasks: () => ({type: TASKS_REQUEST}),
+  getTasks: (data) => ({type: TASKS, payload: data}),
 
-  addTodo: (label) => {
-    return {
-      type: ADD_TASK,
-      id: id++,
-      payload: label,
-    }
-  },
 
-  removeTodo: (id) => {
+  // post task
+  addRequestTask: (label) => ({type: ADD_TASK_REQUEST, payload: label}),
+  addTask: (data) => ({type: ADD_TASK,  payload: data}),
+
+  removeTask: (id) => {
     return {
       type: REMOVE_TASK,
       id

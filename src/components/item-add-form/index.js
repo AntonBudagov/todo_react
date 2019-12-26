@@ -19,11 +19,7 @@ const ItemAddForm = (props) => {
     e.preventDefault();
     if (label) {
       setIsInvalid(false);
-      let task = {
-        label: label,
-        important: false,
-        done: false
-      }
+      let task = {label: label, important: false, done: false};
       props.addTask(task);
       setLabel('');
     } else {

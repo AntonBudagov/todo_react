@@ -59,10 +59,5 @@ const mapStateToProps = state => ({
   todoData: filterItems(searchElement(state.tasks.todoData , state.filterTasks.term), state.filterTasks.filter),
 });
 
-// const mapDispatchToProps = {
-//   getTasks: () => actions.getRequestTasks()
-// };
-
-
 export default connect(mapStateToProps, {getTasks: actions.getRequestTasks})(App);
 

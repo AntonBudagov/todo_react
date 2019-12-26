@@ -16,16 +16,6 @@ const initialState = {
 };
 
 
-const createTodoItem = (label) => {
-  // console.log('dd', newTask);
-  return {
-    // id: newTask.id,
-    label: label,
-    important: false,
-    done: false
-  }
-};
-
 const toggleProperty = (arr, id, propName) => {
   // you can use index instead ID
   const idx = arr.findIndex((el) => el.id === id);
@@ -45,26 +35,17 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
 
     case TASKS_REQUEST:
-      return {
-        ...state,
-        loading: true
-      }
+      return {...state, loading: true}
 
     case TASKS:
-      console.log('TASKS', action);
-      return {
-        ...state,
-        todoData: [...action.payload]
-      };
-
+      return {...state, todoData: [...action.payload]};
 
     case ADD_TASK_REQUEST:
       console.log(action);
       return { ...state, loading: true }
 
     case ADD_TASK:
-      // console.log('ADD_TASK', action);
-      return {...state, loading: false, todoData: [...state.todoData, createTodoItem(action.payload)]};
+      return {...state, loading: false, todoData: [...state.todoData, action.payload]};
 
     case REMOVE_TASK:
       const id = action.id;

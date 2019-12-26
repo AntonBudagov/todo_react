@@ -1,6 +1,5 @@
-import axios from 'axios'
 export default class Task {
-  _apiBase = 'http://localhost:3000/tasks';
+  _apiBase = 'http://localhost:4201/tasks';
 
   async read (id = '') {
     const response = await fetch(`${this._apiBase}/${id}`);
@@ -14,26 +13,17 @@ export default class Task {
     return await this.read();
   }
 
-  // async add(data) {
-  //   return await fetch(this._apiBase, {
-  //     method: 'POST',
-  //     headers: {
-  //       Accept: '*/*',
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.parse(data),
-  //   }).then(res => res.json())
-  // }
+  async add(data) {
+    return await fetch(this._apiBase, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    }).then(res => res.json())
+  }
 
-  // async add(data) {
-  //   return await axios.post(this._apiBase,data)
-  //     .then(function (response) {
-  //       console.log(response);
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //     });
-  // }
 
   async delete(id) {
     return await fetch(`${this._apiBase}/${id}`, {

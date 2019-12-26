@@ -21,7 +21,7 @@ const actions = {
 
   // post task
   addRequestTask: (label) => ({type: ADD_TASK_REQUEST, payload: label}),
-  addTask: (data) => ({type: ADD_TASK,  payload: data}),
+  addTask: (label) => ({type: ADD_TASK,  payload: label}),
 
   removeTask: (id) => {
     return {

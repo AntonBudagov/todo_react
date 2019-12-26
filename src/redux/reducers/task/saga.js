@@ -1,4 +1,4 @@
-import { put, takeEvery, fork, all, take, takeLatest} from 'redux-saga/effects';
+import { put, takeEvery, fork, all, takeLatest} from 'redux-saga/effects';
 import {ADD_TASK_REQUEST, TASKS_REQUEST, TASKS, ADD_TASK} from './types'
 import Task from '../../../service/mock-task';
 const API = new Task();

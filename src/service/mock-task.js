@@ -26,6 +26,7 @@ export default class Task {
 
 
   async delete(id) {
+    console.log(id);
     return await fetch(`${this._apiBase}/${id}`, {
       method: 'DELETE',
       headers: {

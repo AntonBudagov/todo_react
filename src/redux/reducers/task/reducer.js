@@ -1,9 +1,11 @@
 import {
   ADD_TASK_REQUEST,
   ADD_TASK,
+  DELETE_TASK,
+  DELETE_REQUEST_TASK,
   TOGGLE_TASK_DONE,
   TOGGLE_TASK_IMPORTANT,
-  REMOVE_TASK, TASKS_REQUEST,
+  TASKS_REQUEST,
   TASKS
 } from './types';
 
@@ -41,18 +43,21 @@ const reducer = (state = initialState, action) => {
       return {...state, todoData: [...action.payload]};
 
     case ADD_TASK_REQUEST:
-      console.log(action);
+
       return { ...state, loading: true }
 
     case ADD_TASK:
       return {...state, loading: false, todoData: [...state.todoData, action.payload]};
 
-    case REMOVE_TASK:
-      const id = action.id;
+    case DELETE_REQUEST_TASK:
+      return { ...state, loading: true }
+    case DELETE_TASK:
+      const id = action.payload;
       const idx = state.todoData.findIndex((el) => el.id === id);
       const newArray = [...state.todoData.slice(0, idx), ...state.todoData.slice(idx + 1)];
       return {
         ...state,
+        loading: false,
         todoData: newArray
       };
     case TOGGLE_TASK_DONE:

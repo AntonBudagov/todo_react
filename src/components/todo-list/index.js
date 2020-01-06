@@ -36,7 +36,7 @@ const mapStateToProps = ({todoData}) => ({todoData});
 const mapDispatchToProps  = {
   onToggleDone: (id) => todoActions.toggleDone(id),
   onToggleImportant: (id) => todoActions.toggleImportant(id),
-  onDeleted: (id) => todoActions.removeTodo(id)
+  onDeleted: (id) => todoActions.deleteRequestTask(id)
 };
 
 

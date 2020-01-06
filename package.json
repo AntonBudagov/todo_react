@@ -15,11 +15,13 @@
   },
   "scripts": {
     "start": "set PORT=4200 && react-scripts start",
+    "dev": "concurrently \"npm start\" \"npm run server\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "json-server --watch api/db.json",
-    "generate": "json-server api/generate.js"
+    "server": "json-server --watch api/db.json --port=4201",
+    "generate_users": "node api/users_request.js",
+    "generate_tasks": "node api/tasks_request.js"
   },
   "eslintConfig": {
     "extends": "react-app"

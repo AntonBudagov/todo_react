@@ -1,5 +1,5 @@
 export default class Task {
-  _apiBase = 'http://localhost:4201/tasks';
+  _apiBase = 'http://localhost:3000/tasks';
 
   async read (id = '') {
     const response = await fetch(`${this._apiBase}/${id}`);
@@ -33,6 +33,19 @@ export default class Task {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
+    }).then(res => res.json())
+  }
+
+  async update(id, data) {
+    console.log(id);
+    console.log(data);
+    return await fetch(`${this._apiBase}/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
     }).then(res => res.json())
   }
 }

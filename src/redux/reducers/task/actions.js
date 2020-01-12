@@ -3,7 +3,9 @@ import {
   ADD_TASK,
 
   TOGGLE_TASK_DONE,
-  TOGGLE_TASK_IMPORTANT,
+
+  TASK_IMPORTANT_REQUEST,
+  TASK_IMPORTANT,
 
   DELETE_REQUEST_TASK,
   DELETE_TASK,
@@ -25,9 +27,8 @@ const actions = {
   addTask: (label) => ({type: ADD_TASK,  payload: label}),
 
   // delete task
-
   deleteRequestTask: (id) => ({type: DELETE_REQUEST_TASK, payload: id}),
-  deleteTask: (id) => ({type: DELETE_TASK, payload: id}),
+  deleteTask: (id) => ({type: TASK_IMPORTANT, payload: id}),
 
   toggleDone: (id) => {
     return {
@@ -36,12 +37,16 @@ const actions = {
     }
   },
 
-  toggleImportant: (id) => {
-    return {
-      type: TOGGLE_TASK_IMPORTANT,
-      payload: id,
-    }
-  }
+  // toggleImportant: (id) => {
+  //   return {
+  //     type: TOGGLE_TASK_IMPORTANT,
+  //     payload: id,
+  //   }
+  // }
+
+  // toggle Important
+  toggleImportantRequest: (id, task) => ({type: TASK_IMPORTANT_REQUEST, payload: {id, task}}),
+  toggleImportant: (task) => ({type: TASK_IMPORTANT_REQUEST, payload: task})
 };
 
 

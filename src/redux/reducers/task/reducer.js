@@ -4,7 +4,8 @@ import {
   DELETE_TASK,
   DELETE_REQUEST_TASK,
   TOGGLE_TASK_DONE,
-  TOGGLE_TASK_IMPORTANT,
+  TASK_IMPORTANT_REQUEST,
+  TASK_IMPORTANT,
   TASKS_REQUEST,
   TASKS
 } from './types';
@@ -66,10 +67,16 @@ const reducer = (state = initialState, action) => {
         todoData: toggleProperty(state.todoData, action.payload, 'done')
       };
 
-    case TOGGLE_TASK_IMPORTANT:
+    case TASK_IMPORTANT_REQUEST:
       return {
         ...state,
-        todoData: toggleProperty(state.todoData, action.payload, 'important')
+        loading: true,
+      };
+    case TASK_IMPORTANT:
+      return {
+        ...state,
+        loading: false,
+        // todoData: toggleProperty(state.todoData, action.payload.task, 'important')
       };
 
     default:

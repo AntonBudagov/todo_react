@@ -16,7 +16,7 @@ const TodoList = (props) => {
       <li key={id} className="list-group-item">
         <TodoListItem
           {...itemProps}
-          onToggleImportant={() => onToggleImportant(id)}
+          onToggleImportant={() => onToggleImportant(id, item)}
           onToggleDone={() => onToggleDone(id)}
           onDeleted={() => onDeleted(id)}/>
       </li>
@@ -35,7 +35,7 @@ const TodoList = (props) => {
 const mapStateToProps = ({todoData}) => ({todoData});
 const mapDispatchToProps  = {
   onToggleDone: (id) => todoActions.toggleDone(id),
-  onToggleImportant: (id) => todoActions.toggleImportant(id),
+  onToggleImportant: (id, task) => todoActions.toggleImportantRequest(id, task),
   onDeleted: (id) => todoActions.deleteRequestTask(id)
 };
 
